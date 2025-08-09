@@ -6,9 +6,11 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/radi-dev/ai-writer/services/conversation"
 )
 
 var fileServ = http.FileServer(http.Dir("templates/static/"))
@@ -27,6 +29,8 @@ func main() {
 	r.HandleFunc("/settings", settings).Methods("GET")
 	r.HandleFunc("/team", team).Methods("GET")
 	r.HandleFunc("/templates", templates).Methods("GET")
+
+	r.HandleFunc("/generate", generateResponse).Methods("POST")
 
 	if err := http.ListenAndServe(fmt.Sprintf(":%s", "3000"), r); err != nil {
 		fmt.Println("Error starting server:", err)
@@ -119,4 +123,33 @@ func templates(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	t.Execute(w, nil)
+}
+
+func generateResponse(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("generateResponsePost")
+	ctx := r.Context()
+	fmt.Println("\n\nformVal", r.FormValue("length-slider"))
+	topic := r.FormValue("topic-input")
+	lengthStr := r.FormValue("length-slider")
+	length, err := strconv.Atoi(lengthStr)
+	if err != nil {
+		http.Error(w, "Invalid length value", http.StatusBadRequest)
+		return
+	}
+
+	response := conversation.WriteLinkedInArticle(ctx, topic, length)
+	t, err := template.ParseFiles("templates/forms/content_generator_form.html")
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	type responseData struct {
+		Response string
+	}
+	data := responseData{
+		Response: response,
+	}
+
+	t.Execute(w, data)
 }

@@ -271,7 +271,7 @@ function initializeCopyFunctionality() {
 // Initialize all functionality when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   initializeNavigation();
-  initializeContentGenerator();
+  // initializeContentGenerator();
   initializeAIAssistant();
   initializeCopyFunctionality();
 

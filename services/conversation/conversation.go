@@ -11,17 +11,20 @@ import (
 	"github.com/tmc/langchaingo/llms"
 )
 
-func WriteLinkedInArticle(ctx context.Context, prompt string) string {
-	// sysPrompt := `Write a blog outline titled "Why Go is great for LLM apps", with bullet headings`
-	if prompt == "" {
-		prompt = "Write a LinkedIn article"
+func WriteLinkedInArticle(ctx context.Context, topic string, length int) string {
+	prompt := "Write a random LinkedIn article"
+	if topic != "" {
+		prompt = "Write a LinkedIn article based on the topic: " + topic
+	}
+	if length > 0 {
+		prompt += fmt.Sprintf(" with a maximum length of %d words", length)
 	}
 
 	messages.Create(database.DB, "user", prompt)
 
 	completion, err := llms.GenerateFromSinglePrompt(
 		ctx,
-		ai.LLM, prompt,
+		ai.LLM, prompt, llms.WithMaxLength(100),
 		llms.WithTemperature(0.8),
 		llms.WithStreamingFunc(func(ctx context.Context, chunk []byte) error {
 			fmt.Print(string(chunk))
