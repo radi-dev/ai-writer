@@ -1,0 +1,703 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkCraft - AI LinkedIn Content Generator</title>
+    <meta name="description" content="Generate engaging LinkedIn content with AI - Professional content creation tool for marketers and content writers" />
+    <meta name="author" content="LinkCraft" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div id="app">
+      <!-- Header -->
+      <header class="bg-white border-b border-gray-200 shadow-sm">
+        <div class="flex items-center justify-between px-6 py-4">
+          <div class="flex items-center space-x-4">
+            <button id="sidebar-toggle" class="lg:hidden p-2 rounded-md hover:bg-gray-100">
+              <i class="fas fa-bars text-gray-600"></i>
+            </button>
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-sm">LC</span>
+              </div>
+              <span class="font-semibold text-gray-900 hidden sm:block">LinkCraft</span>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <button class="relative p-2 rounded-md hover:bg-gray-100">
+              <i class="fas fa-bell text-gray-600"></i>
+              <span class="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full"></span>
+            </button>
+            <button class="p-2 rounded-md hover:bg-gray-100">
+              <i class="fas fa-cog text-gray-600"></i>
+            </button>
+            <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+              <span class="text-gray-600 font-medium text-sm">CW</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="flex w-full">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 min-h-screen transition-all duration-300">
+          <div class="py-6">
+            <div class="px-4 mb-6">
+              <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Main Menu</h2>
+            </div>
+            <nav class="space-y-1 px-3">
+              <a href="#" class="nav-item flex items-center px-3 py-2 rounded-lg transition-all duration-200 bg-blue-50 text-blue-700 border-r-2 border-blue-600" data-page="generator">
+                <i class="fas fa-file-text w-5 h-5 flex-shrink-0"></i>
+                <span class="ml-3 font-medium">Content Generator</span>
+              </a>
+              <a href="#" class="nav-item flex items-center px-3 py-2 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900" data-page="templates">
+                <i class="fas fa-book-open w-5 h-5 flex-shrink-0"></i>
+                <span class="ml-3 font-medium">Templates</span>
+              </a>
+              <a href="#" class="nav-item flex items-center px-3 py-2 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900" data-page="scheduler">
+                <i class="fas fa-calendar w-5 h-5 flex-shrink-0"></i>
+                <span class="ml-3 font-medium">Post Scheduler</span>
+              </a>
+              <a href="#" class="nav-item flex items-center px-3 py-2 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900" data-page="analytics">
+                <i class="fas fa-chart-bar w-5 h-5 flex-shrink-0"></i>
+                <span class="ml-3 font-medium">Analytics</span>
+              </a>
+              <a href="#" class="nav-item flex items-center px-3 py-2 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900" data-page="assistant">
+                <i class="fas fa-bolt w-5 h-5 flex-shrink-0"></i>
+                <span class="ml-3 font-medium">AI Assistant</span>
+              </a>
+              <a href="#" class="nav-item flex items-center px-3 py-2 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900" data-page="media">
+                <i class="fas fa-image w-5 h-5 flex-shrink-0"></i>
+                <span class="ml-3 font-medium">Media Library</span>
+              </a>
+              <a href="#" class="nav-item flex items-center px-3 py-2 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900" data-page="team">
+                <i class="fas fa-users w-5 h-5 flex-shrink-0"></i>
+                <span class="ml-3 font-medium">Team</span>
+              </a>
+              <a href="#" class="nav-item flex items-center px-3 py-2 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900" data-page="settings">
+                <i class="fas fa-cog w-5 h-5 flex-shrink-0"></i>
+                <span class="ml-3 font-medium">Settings</span>
+              </a>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+          <!-- Content Generator Page -->
+          <div id="generator-page" class="page-content">
+            <div class="max-w-7xl mx-auto">
+              <div class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">LinkedIn Content Generator</h1>
+                <p class="text-xl text-gray-600">Create engaging LinkedIn content with the power of AI</p>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Generator Form -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 h-fit">
+                  <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold flex items-center gap-2">
+                      <i class="fas fa-magic-wand-sparkles text-blue-600"></i>
+                      Generate Content
+                    </h2>
+                  </div>
+                  <div class="p-6 space-y-6">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Topic or Idea</label>
+                      <textarea id="topic-input" placeholder="What do you want to write about? (e.g., 'The importance of personal branding for career growth')" class="w-full min-h-[100px] p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Content Type</label>
+                        <select id="content-type" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                          <option value="post">Standard Post</option>
+                          <option value="story">Story</option>
+                          <option value="tips">Tips & Advice</option>
+                          <option value="question">Question</option>
+                          <option value="poll">Poll</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tone</label>
+                        <select id="tone" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                          <option value="professional">Professional</option>
+                          <option value="casual">Casual</option>
+                          <option value="inspirational">Inspirational</option>
+                          <option value="educational">Educational</option>
+                          <option value="humorous">Humorous</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Target Audience</label>
+                      <select id="audience" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select target audience</option>
+                        <option value="entrepreneurs">Entrepreneurs</option>
+                        <option value="marketers">Marketing Professionals</option>
+                        <option value="developers">Developers</option>
+                        <option value="sales">Sales Teams</option>
+                        <option value="hr">HR Professionals</option>
+                        <option value="students">Students</option>
+                        <option value="executives">Executives</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Keywords (comma-separated)</label>
+                      <textarea id="keywords" placeholder="leadership, innovation, growth mindset" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none" rows="2"></textarea>
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Length: <span id="length-value">150</span> words</label>
+                      <input type="range" id="length-slider" min="50" max="500" value="150" step="25" class="w-full">
+                    </div>
+
+                    <button id="generate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors">
+                      <i class="fas fa-magic-wand-sparkles mr-2"></i>
+                      Generate Content
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Preview -->
+                <div class="space-y-6">
+                  <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+                      <h2 class="text-xl font-semibold">Preview</h2>
+                      <div class="flex gap-2">
+                        <button class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50">
+                          <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                        <button class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50">
+                          <i class="fas fa-download mr-1"></i>Export
+                        </button>
+                      </div>
+                    </div>
+                    <div class="p-6">
+                      <div id="preview-content" class="text-center py-12 text-gray-500">
+                        <i class="fas fa-comment-dots text-4xl mb-4 opacity-50"></i>
+                        <p>Your generated content will appear here</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Stats -->
+                  <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                      <h2 class="text-lg font-semibold">Content Analysis</h2>
+                    </div>
+                    <div class="p-6">
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                          <div id="word-count" class="text-2xl font-bold text-blue-600">0</div>
+                          <div class="text-sm text-gray-600">Words</div>
+                        </div>
+                        <div class="text-center p-4 bg-green-50 rounded-lg">
+                          <div id="char-count" class="text-2xl font-bold text-green-600">0</div>
+                          <div class="text-sm text-gray-600">Characters</div>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                          <div class="text-2xl font-bold text-purple-600">8.2</div>
+                          <div class="text-sm text-gray-600">Readability</div>
+                        </div>
+                        <div class="text-center p-4 bg-orange-50 rounded-lg">
+                          <div class="text-2xl font-bold text-orange-600">85%</div>
+                          <div class="text-sm text-gray-600">Engagement</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Templates Page -->
+          <div id="templates-page" class="page-content hidden">
+            <div class="max-w-7xl mx-auto">
+              <div class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">Content Templates</h1>
+                <p class="text-xl text-gray-600">Pre-built templates to jumpstart your content creation</p>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                  <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-lightbulb text-blue-600"></i>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold">Industry Insights</h3>
+                  </div>
+                  <p class="text-gray-600 mb-4">Share your expertise and industry knowledge with your network.</p>
+                  <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">Use Template</button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                  <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-trophy text-green-600"></i>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold">Success Story</h3>
+                  </div>
+                  <p class="text-gray-600 mb-4">Celebrate achievements and inspire others with your journey.</p>
+                  <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">Use Template</button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                  <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-question-circle text-purple-600"></i>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold">Discussion Starter</h3>
+                  </div>
+                  <p class="text-gray-600 mb-4">Engage your audience with thought-provoking questions.</p>
+                  <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">Use Template</button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                  <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-list text-orange-600"></i>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold">Tips & Tricks</h3>
+                  </div>
+                  <p class="text-gray-600 mb-4">Share valuable tips and actionable advice with your audience.</p>
+                  <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">Use Template</button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                  <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-heart text-red-600"></i>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold">Personal Story</h3>
+                  </div>
+                  <p class="text-gray-600 mb-4">Connect with your audience through personal experiences.</p>
+                  <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">Use Template</button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                  <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-poll text-indigo-600"></i>
+                    </div>
+                    <h3 class="ml-3 text-lg font-semibold">Poll & Survey</h3>
+                  </div>
+                  <p class="text-gray-600 mb-4">Gather opinions and insights from your network.</p>
+                  <button class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">Use Template</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scheduler Page -->
+          <div id="scheduler-page" class="page-content hidden">
+            <div class="max-w-7xl mx-auto">
+              <div class="mb-8 flex justify-between items-center">
+                <div>
+                  <h1 class="text-4xl font-bold text-gray-900 mb-2">Post Scheduler</h1>
+                  <p class="text-xl text-gray-600">Schedule your LinkedIn posts for optimal engagement</p>
+                </div>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                  <i class="fas fa-plus mr-2"></i>Schedule Post
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Calendar -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-sm border border-gray-200">
+                  <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold">Content Calendar</h2>
+                  </div>
+                  <div class="p-6">
+                    <div class="grid grid-cols-7 gap-1 mb-4">
+                      <div class="text-center text-sm font-medium text-gray-500 py-2">Sun</div>
+                      <div class="text-center text-sm font-medium text-gray-500 py-2">Mon</div>
+                      <div class="text-center text-sm font-medium text-gray-500 py-2">Tue</div>
+                      <div class="text-center text-sm font-medium text-gray-500 py-2">Wed</div>
+                      <div class="text-center text-sm font-medium text-gray-500 py-2">Thu</div>
+                      <div class="text-center text-sm font-medium text-gray-500 py-2">Fri</div>
+                      <div class="text-center text-sm font-medium text-gray-500 py-2">Sat</div>
+                    </div>
+                    <div class="grid grid-cols-7 gap-1">
+                      <!-- Calendar days would be generated here -->
+                      <div class="h-20 border border-gray-200 p-1 text-sm">1</div>
+                      <div class="h-20 border border-gray-200 p-1 text-sm">2</div>
+                      <div class="h-20 border border-gray-200 p-1 text-sm bg-blue-50">
+                        3
+                        <div class="bg-blue-600 text-white text-xs px-1 rounded mt-1">Post</div>
+                      </div>
+                      <div class="h-20 border border-gray-200 p-1 text-sm">4</div>
+                      <div class="h-20 border border-gray-200 p-1 text-sm">5</div>
+                      <div class="h-20 border border-gray-200 p-1 text-sm">6</div>
+                      <div class="h-20 border border-gray-200 p-1 text-sm">7</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Scheduled Posts -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                  <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold">Upcoming Posts</h2>
+                  </div>
+                  <div class="p-6 space-y-4">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                      <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm text-gray-500">Tomorrow, 9:00 AM</span>
+                        <button class="text-gray-400 hover:text-gray-600">
+                          <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                      </div>
+                      <p class="text-sm text-gray-900 mb-2">5 tips for effective remote team collaboration...</p>
+                      <div class="flex justify-between items-center">
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Scheduled</span>
+                        <div class="flex space-x-2">
+                          <button class="text-xs text-blue-600 hover:text-blue-800">Edit</button>
+                          <button class="text-xs text-red-600 hover:text-red-800">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4">
+                      <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm text-gray-500">Friday, 2:00 PM</span>
+                        <button class="text-gray-400 hover:text-gray-600">
+                          <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                      </div>
+                      <p class="text-sm text-gray-900 mb-2">Celebrating our team's achievement in Q4...</p>
+                      <div class="flex justify-between items-center">
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Draft</span>
+                        <div class="flex space-x-2">
+                          <button class="text-xs text-blue-600 hover:text-blue-800">Edit</button>
+                          <button class="text-xs text-red-600 hover:text-red-800">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Analytics Page -->
+          <div id="analytics-page" class="page-content hidden">
+            <div class="max-w-7xl mx-auto">
+              <div class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">Analytics Dashboard</h1>
+                <p class="text-xl text-gray-600">Track your LinkedIn content performance</p>
+              </div>
+
+              <!-- Stats Cards -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-eye text-blue-600"></i>
+                    </div>
+                    <div class="ml-4">
+                      <p class="text-sm font-medium text-gray-600">Total Views</p>
+                      <p class="text-2xl font-bold text-gray-900">12,847</p>
+                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <span class="text-green-600 text-sm font-medium">+12.5%</span>
+                    <span class="text-gray-600 text-sm"> from last month</span>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-thumbs-up text-green-600"></i>
+                    </div>
+                    <div class="ml-4">
+                      <p class="text-sm font-medium text-gray-600">Engagement Rate</p>
+                      <p class="text-2xl font-bold text-gray-900">8.2%</p>
+                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <span class="text-green-600 text-sm font-medium">+2.1%</span>
+                    <span class="text-gray-600 text-sm"> from last month</span>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-share text-purple-600"></i>
+                    </div>
+                    <div class="ml-4">
+                      <p class="text-sm font-medium text-gray-600">Shares</p>
+                      <p class="text-2xl font-bold text-gray-900">1,234</p>
+                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <span class="text-green-600 text-sm font-medium">+18.2%</span>
+                    <span class="text-gray-600 text-sm"> from last month</span>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-comments text-orange-600"></i>
+                    </div>
+                    <div class="ml-4">
+                      <p class="text-sm font-medium text-gray-600">Comments</p>
+                      <p class="text-2xl font-bold text-gray-900">567</p>
+                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <span class="text-green-600 text-sm font-medium">+7.8%</span>
+                    <span class="text-gray-600 text-sm"> from last month</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Charts -->
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <h3 class="text-lg font-semibold mb-4">Engagement Over Time</h3>
+                  <div class="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
+                    <p class="text-gray-500">Chart would be rendered here</p>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <h3 class="text-lg font-semibold mb-4">Top Performing Posts</h3>
+                  <div class="space-y-4">
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                      <div>
+                        <p class="text-sm font-medium">5 Tips for Remote Work Success</p>
+                        <p class="text-xs text-gray-600">Posted 3 days ago</p>
+                      </div>
+                      <div class="text-right">
+                        <p class="text-sm font-bold">2.3k views</p>
+                        <p class="text-xs text-gray-600">156 likes</p>
+                      </div>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                      <div>
+                        <p class="text-sm font-medium">The Future of AI in Marketing</p>
+                        <p class="text-xs text-gray-600">Posted 1 week ago</p>
+                      </div>
+                      <div class="text-right">
+                        <p class="text-sm font-bold">1.8k views</p>
+                        <p class="text-xs text-gray-600">124 likes</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Assistant Page -->
+          <div id="assistant-page" class="page-content hidden">
+            <div class="max-w-4xl mx-auto">
+              <div class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">AI Assistant</h1>
+                <p class="text-xl text-gray-600">Get personalized content suggestions and writing help</p>
+              </div>
+
+              <div class="bg-white rounded-lg shadow-sm border border-gray-200 min-h-[600px] flex flex-col">
+                <div class="p-6 border-b border-gray-200">
+                  <h2 class="text-xl font-semibold">Chat with AI Assistant</h2>
+                </div>
+                <div class="flex-1 p-6 overflow-y-auto" id="chat-messages">
+                  <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                      <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot text-blue-600"></i>
+                      </div>
+                      <div class="bg-gray-100 rounded-lg p-3 max-w-xs">
+                        <p class="text-sm">Hello! I'm your AI writing assistant. How can I help you create better LinkedIn content today?</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-6 border-t border-gray-200">
+                  <div class="flex space-x-3">
+                    <input type="text" id="chat-input" placeholder="Ask me anything about content creation..." class="flex-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <button id="send-message" class="bg-blue-600 text-white px-4 py-3 rounded-md hover:bg-blue-700 transition-colors">
+                      <i class="fas fa-paper-plane"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Media Library Page -->
+          <div id="media-page" class="page-content hidden">
+            <div class="max-w-7xl mx-auto">
+              <div class="mb-8 flex justify-between items-center">
+                <div>
+                  <h1 class="text-4xl font-bold text-gray-900 mb-2">Media Library</h1>
+                  <p class="text-xl text-gray-600">Manage your images, videos, and documents</p>
+                </div>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                  <i class="fas fa-upload mr-2"></i>Upload Media
+                </button>
+              </div>
+
+              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
+                  <div class="bg-gray-200 rounded-lg h-24 mb-3 flex items-center justify-center">
+                    <i class="fas fa-image text-gray-400 text-2xl"></i>
+                  </div>
+                  <p class="text-sm font-medium truncate">image1.jpg</p>
+                  <p class="text-xs text-gray-500">2.1 MB</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
+                  <div class="bg-gray-200 rounded-lg h-24 mb-3 flex items-center justify-center">
+                    <i class="fas fa-video text-gray-400 text-2xl"></i>
+                  </div>
+                  <p class="text-sm font-medium truncate">video1.mp4</p>
+                  <p class="text-xs text-gray-500">15.3 MB</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
+                  <div class="bg-gray-200 rounded-lg h-24 mb-3 flex items-center justify-center">
+                    <i class="fas fa-file-pdf text-gray-400 text-2xl"></i>
+                  </div>
+                  <p class="text-sm font-medium truncate">document.pdf</p>
+                  <p class="text-xs text-gray-500">852 KB</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Page -->
+          <div id="team-page" class="page-content hidden">
+            <div class="max-w-7xl mx-auto">
+              <div class="mb-8 flex justify-between items-center">
+                <div>
+                  <h1 class="text-4xl font-bold text-gray-900 mb-2">Team Management</h1>
+                  <p class="text-xl text-gray-600">Collaborate with your team members</p>
+                </div>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                  <i class="fas fa-user-plus mr-2"></i>Invite Member
+                </button>
+              </div>
+
+              <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                <div class="p-6">
+                  <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                      <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                          <span class="text-blue-600 font-medium">JD</span>
+                        </div>
+                        <div>
+                          <h3 class="font-medium">John Doe</h3>
+                          <p class="text-sm text-gray-600">john@example.com</p>
+                        </div>
+                      </div>
+                      <div class="flex items-center space-x-3">
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Admin</span>
+                        <button class="text-gray-400 hover:text-gray-600">
+                          <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                      <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                          <span class="text-purple-600 font-medium">JS</span>
+                        </div>
+                        <div>
+                          <h3 class="font-medium">Jane Smith</h3>
+                          <p class="text-sm text-gray-600">jane@example.com</p>
+                        </div>
+                      </div>
+                      <div class="flex items-center space-x-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Editor</span>
+                        <button class="text-gray-400 hover:text-gray-600">
+                          <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Settings Page -->
+          <div id="settings-page" class="page-content hidden">
+            <div class="max-w-4xl mx-auto">
+              <div class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">Settings</h1>
+                <p class="text-xl text-gray-600">Manage your account and preferences</p>
+              </div>
+
+              <div class="space-y-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                  <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold">Profile Settings</h2>
+                  </div>
+                  <div class="p-6 space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="John">
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Doe">
+                      </div>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                      <input type="email" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="john@example.com">
+                    </div>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">Save Changes</button>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                  <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold">Notification Settings</h2>
+                  </div>
+                  <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <h3 class="font-medium">Email Notifications</h3>
+                        <p class="text-sm text-gray-600">Receive email notifications for important updates</p>
+                      </div>
+                      <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer" checked>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                      </label>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <h3 class="font-medium">Push Notifications</h3>
+                        <p class="text-sm text-gray-600">Receive push notifications in your browser</p>
+                      </div>
+                      <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

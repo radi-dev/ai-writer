@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team - LinkedIn Content Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-sm border-r border-gray-200 min-h-screen">
+            <div class="p-6">
+                <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-4">Main Menu</h2>
+                <nav class="space-y-2">
+                    <a href="index.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        <span>Content Generator</span>
+                    </a>
+                    <a href="templates.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="layout-template" class="w-4 h-4"></i>
+                        <span>Templates</span>
+                    </a>
+                    <a href="scheduler.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                        <span>Post Scheduler</span>
+                    </a>
+                    <a href="analytics.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="ai-assistant.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="zap" class="w-4 h-4"></i>
+                        <span>AI Assistant</span>
+                    </a>
+                    <a href="media-library.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="image" class="w-4 h-4"></i>
+                        <span>Media Library</span>
+                    </a>
+                    <a href="team.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                        <span>Team</span>
+                    </a>
+                    <a href="settings.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="settings" class="w-4 h-4"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1">
+            <!-- Header -->
+            <div class="bg-white border-b border-gray-200 px-8 py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Team</h1>
+                        <p class="text-gray-600 mt-1">Manage team members and collaboration</p>
+                    </div>
+                    <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2">
+                        <i data-lucide="user-plus" class="w-4 h-4"></i>
+                        <span>Invite Member</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <!-- Team Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Total Members</p>
+                                <p class="text-2xl font-bold text-gray-900">8</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="users" class="w-6 h-6 text-blue-600"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Active This Month</p>
+                                <p class="text-2xl font-bold text-gray-900">6</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="user-check" class="w-6 h-6 text-green-600"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Pending Invites</p>
+                                <p class="text-2xl font-bold text-gray-900">2</p>
+                            </div>
+                            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="clock" class="w-6 h-6 text-yellow-600"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Members -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900">Team Members</h3>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <!-- Team Member 1 -->
+                        <div class="px-6 py-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm font-medium">JD</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">John Doe</div>
+                                        <div class="text-sm text-gray-500">john@company.com</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">Owner</span>
+                                    <div class="text-sm text-gray-500">Last active: Today</div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Team Member 2 -->
+                        <div class="px-6 py-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm font-medium">SM</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Sarah Miller</div>
+                                        <div class="text-sm text-gray-500">sarah@company.com</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Admin</span>
+                                    <div class="text-sm text-gray-500">Last active: 2 hours ago</div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Team Member 3 -->
+                        <div class="px-6 py-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm font-medium">MJ</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Mike Johnson</div>
+                                        <div class="text-sm text-gray-500">mike@company.com</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded">Editor</span>
+                                    <div class="text-sm text-gray-500">Last active: Yesterday</div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Team Member 4 -->
+                        <div class="px-6 py-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm font-medium">EB</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Emily Brown</div>
+                                        <div class="text-sm text-gray-500">emily@company.com</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded">Viewer</span>
+                                    <div class="text-sm text-gray-500">Last active: 3 days ago</div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Invite -->
+                        <div class="px-6 py-4 bg-yellow-50">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                                        <i data-lucide="mail" class="w-4 h-4 text-gray-500"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">alex@company.com</div>
+                                        <div class="text-sm text-gray-500">Invitation sent 2 days ago</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded">Pending</span>
+                                    <button class="text-primary hover:text-primary/80 text-sm font-medium">Resend</button>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Roles & Permissions -->
+                <div class="mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6">Roles & Permissions</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Owner Role -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <h4 class="font-medium text-gray-900">Owner</h4>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Full access to all features</li>
+                                <li>• Manage team members</li>
+                                <li>• Billing and subscription</li>
+                                <li>• Delete workspace</li>
+                            </ul>
+                        </div>
+
+                        <!-- Admin Role -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                <h4 class="font-medium text-gray-900">Admin</h4>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Create and edit content</li>
+                                <li>• Manage templates</li>
+                                <li>• Invite team members</li>
+                                <li>• View analytics</li>
+                            </ul>
+                        </div>
+
+                        <!-- Editor Role -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+                                <h4 class="font-medium text-gray-900">Editor</h4>
+                            </div>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Create and edit content</li>
+                                <li>• Use templates</li>
+                                <li>• Schedule posts</li>
+                                <li>• Limited analytics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

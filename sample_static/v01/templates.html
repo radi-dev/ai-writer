@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates - LinkedIn Content Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-sm border-r border-gray-200 min-h-screen">
+            <div class="p-6">
+                <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-4">Main Menu</h2>
+                <nav class="space-y-2">
+                    <a href="index.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        <span>Content Generator</span>
+                    </a>
+                    <a href="templates.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white">
+                        <i data-lucide="layout-template" class="w-4 h-4"></i>
+                        <span>Templates</span>
+                    </a>
+                    <a href="scheduler.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                        <span>Post Scheduler</span>
+                    </a>
+                    <a href="analytics.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="ai-assistant.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="zap" class="w-4 h-4"></i>
+                        <span>AI Assistant</span>
+                    </a>
+                    <a href="media-library.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="image" class="w-4 h-4"></i>
+                        <span>Media Library</span>
+                    </a>
+                    <a href="team.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                        <span>Team</span>
+                    </a>
+                    <a href="settings.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="settings" class="w-4 h-4"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1">
+            <!-- Header -->
+            <div class="bg-white border-b border-gray-200 px-8 py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Templates</h1>
+                        <p class="text-gray-600 mt-1">Pre-built templates to jumpstart your content creation</p>
+                    </div>
+                    <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>Create Template</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <!-- Filter Tabs -->
+                <div class="flex space-x-1 mb-8 bg-gray-100 p-1 rounded-lg w-fit">
+                    <button class="py-2 px-4 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm">All Templates</button>
+                    <button class="py-2 px-4 text-sm font-medium rounded-md text-gray-500 hover:text-gray-700">Posts</button>
+                    <button class="py-2 px-4 text-sm font-medium rounded-md text-gray-500 hover:text-gray-700">Articles</button>
+                    <button class="py-2 px-4 text-sm font-medium rounded-md text-gray-500 hover:text-gray-700">Carousels</button>
+                </div>
+
+                <!-- Templates Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Template Card 1 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Post</span>
+                            <button class="text-gray-400 hover:text-gray-600">
+                                <i data-lucide="bookmark" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Industry Insights</h3>
+                        <p class="text-gray-600 text-sm mb-4">Share valuable insights about your industry with this professional template.</p>
+                        <div class="text-xs text-gray-500 mb-4">
+                            <span>Professional tone • 150-200 words</span>
+                        </div>
+                        <button class="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                            Use Template
+                        </button>
+                    </div>
+
+                    <!-- Template Card 2 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">Article</span>
+                            <button class="text-gray-400 hover:text-gray-600">
+                                <i data-lucide="bookmark" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">How-To Guide</h3>
+                        <p class="text-gray-600 text-sm mb-4">Step-by-step guide template for educational content.</p>
+                        <div class="text-xs text-gray-500 mb-4">
+                            <span>Educational tone • 800-1200 words</span>
+                        </div>
+                        <button class="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                            Use Template
+                        </button>
+                    </div>
+
+                    <!-- Template Card 3 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded">Carousel</span>
+                            <button class="text-gray-400 hover:text-gray-600">
+                                <i data-lucide="bookmark" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Tips & Tricks</h3>
+                        <p class="text-gray-600 text-sm mb-4">Share actionable tips in an engaging carousel format.</p>
+                        <div class="text-xs text-gray-500 mb-4">
+                            <span>Casual tone • 5-10 slides</span>
+                        </div>
+                        <button class="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                            Use Template
+                        </button>
+                    </div>
+
+                    <!-- Template Card 4 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded">Post</span>
+                            <button class="text-gray-400 hover:text-gray-600">
+                                <i data-lucide="bookmark" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Personal Story</h3>
+                        <p class="text-gray-600 text-sm mb-4">Share personal experiences and lessons learned.</p>
+                        <div class="text-xs text-gray-500 mb-4">
+                            <span>Inspirational tone • 100-150 words</span>
+                        </div>
+                        <button class="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                            Use Template
+                        </button>
+                    </div>
+
+                    <!-- Template Card 5 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs font-medium rounded">Post</span>
+                            <button class="text-gray-400 hover:text-gray-600">
+                                <i data-lucide="bookmark" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Question Post</h3>
+                        <p class="text-gray-600 text-sm mb-4">Engage your audience with thought-provoking questions.</p>
+                        <div class="text-xs text-gray-500 mb-4">
+                            <span>Engaging tone • 50-100 words</span>
+                        </div>
+                        <button class="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                            Use Template
+                        </button>
+                    </div>
+
+                    <!-- Template Card 6 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded">Article</span>
+                            <button class="text-gray-400 hover:text-gray-600">
+                                <i data-lucide="bookmark" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Trend Analysis</h3>
+                        <p class="text-gray-600 text-sm mb-4">Analyze and discuss current industry trends.</p>
+                        <div class="text-xs text-gray-500 mb-4">
+                            <span>Analytical tone • 600-800 words</span>
+                        </div>
+                        <button class="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                            Use Template
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

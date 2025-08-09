@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Library - LinkedIn Content Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-sm border-r border-gray-200 min-h-screen">
+            <div class="p-6">
+                <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-4">Main Menu</h2>
+                <nav class="space-y-2">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        <span>Content Generator</span>
+                    </a>
+                    <a href="templates.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="layout-template" class="w-4 h-4"></i>
+                        <span>Templates</span>
+                    </a>
+                    <a href="scheduler.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                        <span>Post Scheduler</span>
+                    </a>
+                    <a href="analytics.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="ai-assistant.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="zap" class="w-4 h-4"></i>
+                        <span>AI Assistant</span>
+                    </a>
+                    <a href="media-library.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white">
+                        <i data-lucide="image" class="w-4 h-4"></i>
+                        <span>Media Library</span>
+                    </a>
+                    <a href="team.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                        <span>Team</span>
+                    </a>
+                    <a href="settings.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="settings" class="w-4 h-4"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1">
+            <!-- Header -->
+            <div class="bg-white border-b border-gray-200 px-8 py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Media Library</h1>
+                        <p class="text-gray-600 mt-1">Manage your images, videos, and other media assets</p>
+                    </div>
+                    <button
+                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2">
+                        <i data-lucide="upload" class="w-4 h-4"></i>
+                        <span>Upload Media</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <!-- Filter and Search -->
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+                        <button class="py-2 px-4 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm">All
+                            Media</button>
+                        <button
+                            class="py-2 px-4 text-sm font-medium rounded-md text-gray-500 hover:text-gray-700">Images</button>
+                        <button
+                            class="py-2 px-4 text-sm font-medium rounded-md text-gray-500 hover:text-gray-700">Videos</button>
+                        <button
+                            class="py-2 px-4 text-sm font-medium rounded-md text-gray-500 hover:text-gray-700">Documents</button>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="text" placeholder="Search media..."
+                                class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-3"></i>
+                        </div>
+                        <select class="border border-gray-300 rounded-lg px-3 py-2">
+                            <option>Recent</option>
+                            <option>Oldest</option>
+                            <option>Name A-Z</option>
+                            <option>Size</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Media Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <!-- Image Item -->
+                    <div
+                        class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="aspect-square bg-gradient-to-br from-blue-400 to-purple-500 relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i data-lucide="image" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
+                                    <i data-lucide="more-horizontal" class="w-4 h-4 text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="text-sm font-medium text-gray-900 truncate">marketing-chart.png</div>
+                            <div class="text-xs text-gray-500">2.1 MB • PNG</div>
+                        </div>
+                    </div>
+
+                    <!-- Video Item -->
+                    <div
+                        class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="aspect-square bg-gradient-to-br from-green-400 to-blue-500 relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i data-lucide="play" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
+                                    <i data-lucide="more-horizontal" class="w-4 h-4 text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="text-sm font-medium text-gray-900 truncate">intro-video.mp4</div>
+                            <div class="text-xs text-gray-500">15.3 MB • MP4</div>
+                        </div>
+                    </div>
+
+                    <!-- Document Item -->
+                    <div
+                        class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="aspect-square bg-gradient-to-br from-yellow-400 to-orange-500 relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i data-lucide="file-text" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
+                                    <i data-lucide="more-horizontal" class="w-4 h-4 text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="text-sm font-medium text-gray-900 truncate">content-strategy.pdf</div>
+                            <div class="text-xs text-gray-500">892 KB • PDF</div>
+                        </div>
+                    </div>
+
+                    <!-- More Image Items -->
+                    <div
+                        class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="aspect-square bg-gradient-to-br from-purple-400 to-pink-500 relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i data-lucide="image" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
+                                    <i data-lucide="more-horizontal" class="w-4 h-4 text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="text-sm font-medium text-gray-900 truncate">team-photo.jpg</div>
+                            <div class="text-xs text-gray-500">3.7 MB • JPG</div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="aspect-square bg-gradient-to-br from-red-400 to-yellow-500 relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i data-lucide="image" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
+                                    <i data-lucide="more-horizontal" class="w-4 h-4 text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="text-sm font-medium text-gray-900 truncate">infographic.png</div>
+                            <div class="text-xs text-gray-500">1.8 MB • PNG</div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="aspect-square bg-gradient-to-br from-indigo-400 to-purple-500 relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i data-lucide="image" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
+                                    <i data-lucide="more-horizontal" class="w-4 h-4 text-gray-600"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <div class="text-sm font-medium text-gray-900 truncate">logo-design.svg</div>
+                            <div class="text-xs text-gray-500">245 KB • SVG</div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Placeholder -->
+                    <div
+                        class="border-2 border-dashed border-gray-300 rounded-lg aspect-square flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-colors cursor-pointer">
+                        <div class="text-center">
+                            <i data-lucide="plus" class="w-8 h-8 text-gray-400 mx-auto mb-2"></i>
+                            <div class="text-sm text-gray-500">Upload Media</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Usage -->
+                <div class="mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Storage Usage</h3>
+                        <button class="text-primary hover:text-primary/80 text-sm font-medium">Upgrade Storage</button>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-1">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-600">Used</span>
+                                <span class="font-medium">2.4 GB of 5 GB</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 48%"></div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-sm text-gray-600">2.6 GB remaining</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Scheduler - LinkedIn Content Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-sm border-r border-gray-200 min-h-screen">
+            <div class="p-6">
+                <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-4">Main Menu</h2>
+                <nav class="space-y-2">
+                    <a href="index.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        <span>Content Generator</span>
+                    </a>
+                    <a href="templates.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="layout-template" class="w-4 h-4"></i>
+                        <span>Templates</span>
+                    </a>
+                    <a href="scheduler.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                        <span>Post Scheduler</span>
+                    </a>
+                    <a href="analytics.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="ai-assistant.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="zap" class="w-4 h-4"></i>
+                        <span>AI Assistant</span>
+                    </a>
+                    <a href="media-library.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="image" class="w-4 h-4"></i>
+                        <span>Media Library</span>
+                    </a>
+                    <a href="team.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                        <span>Team</span>
+                    </a>
+                    <a href="settings.html"
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="settings" class="w-4 h-4"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1">
+            <!-- Header -->
+            <div class="bg-white border-b border-gray-200 px-8 py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Post Scheduler</h1>
+                        <p class="text-gray-600 mt-1">Schedule and manage your LinkedIn posts</p>
+                    </div>
+                    <button
+                        class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>Schedule Post</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <!-- Calendar View Toggle -->
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+                        <button
+                            class="py-2 px-4 text-sm font-medium rounded-md bg-white text-gray-900 shadow-sm">Calendar</button>
+                        <button class="py-2 px-4 text-sm font-medium rounded-md text-gray-500 hover:text-gray-700">List
+                            View</button>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                            <option>This Month</option>
+                            <option>Next Month</option>
+                            <option>This Week</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <!-- Calendar Header -->
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-semibold text-gray-900">December 2024</h2>
+                            <div class="flex items-center space-x-2">
+                                <button class="p-2 hover:bg-gray-200 rounded-lg">
+                                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                                </button>
+                                <button class="p-2 hover:bg-gray-200 rounded-lg">
+                                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Days of Week -->
+                    <div class="grid grid-cols-7 border-b border-gray-200">
+                        <div class="p-4 text-center text-sm font-medium text-gray-500">Sun</div>
+                        <div class="p-4 text-center text-sm font-medium text-gray-500">Mon</div>
+                        <div class="p-4 text-center text-sm font-medium text-gray-500">Tue</div>
+                        <div class="p-4 text-center text-sm font-medium text-gray-500">Wed</div>
+                        <div class="p-4 text-center text-sm font-medium text-gray-500">Thu</div>
+                        <div class="p-4 text-center text-sm font-medium text-gray-500">Fri</div>
+                        <div class="p-4 text-center text-sm font-medium text-gray-500">Sat</div>
+                    </div>
+
+                    <!-- Calendar Days -->
+                    <div class="grid grid-cols-7">
+                        <!-- Week 1 -->
+                        <div class="p-4 h-32 border-r border-b border-gray-200 text-gray-400">1</div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">2</div>
+                            <div class="bg-primary text-white text-xs px-2 py-1 rounded mb-1">10:00 AM</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">3</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">4</div>
+                            <div class="bg-green-500 text-white text-xs px-2 py-1 rounded mb-1">2:00 PM</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">5</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">6</div>
+                        </div>
+                        <div class="p-4 h-32 border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">7</div>
+                        </div>
+
+                        <!-- Week 2 -->
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">8</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">9</div>
+                            <div class="bg-yellow-500 text-white text-xs px-2 py-1 rounded mb-1">9:00 AM</div>
+                            <div class="bg-purple-500 text-white text-xs px-2 py-1 rounded">4:00 PM</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">10</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">11</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">12</div>
+                            <div class="bg-blue-500 text-white text-xs px-2 py-1 rounded mb-1">11:00 AM</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">13</div>
+                        </div>
+                        <div class="p-4 h-32 border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">14</div>
+                        </div>
+
+                        <!-- Continue with more weeks... -->
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">15</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">16</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">17</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">18</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">19</div>
+                        </div>
+                        <div class="p-4 h-32 border-r border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">20</div>
+                        </div>
+                        <div class="p-4 h-32 border-b border-gray-200">
+                            <div class="text-sm font-medium mb-2">21</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Posts -->
+                <div class="mt-8">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Upcoming Posts</h3>
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-900">Industry Insights: AI in Marketing</h4>
+                                        <p class="text-sm text-gray-600">Scheduled for Dec 2, 2024 at 10:00 AM</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span
+                                        class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Post</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="edit" class="w-4 h-4"></i>
+                                    </button>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-900">How to Build Your Personal Brand</h4>
+                                        <p class="text-sm text-gray-600">Scheduled for Dec 4, 2024 at 2:00 PM</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span
+                                        class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">Article</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="edit" class="w-4 h-4"></i>
+                                    </button>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

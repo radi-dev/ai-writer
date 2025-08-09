@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - LinkedIn Content Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-sm border-r border-gray-200 min-h-screen">
+            <div class="p-6">
+                <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-4">Main Menu</h2>
+                <nav class="space-y-2">
+                    <a href="index.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        <span>Content Generator</span>
+                    </a>
+                    <a href="templates.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="layout-template" class="w-4 h-4"></i>
+                        <span>Templates</span>
+                    </a>
+                    <a href="scheduler.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                        <span>Post Scheduler</span>
+                    </a>
+                    <a href="analytics.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary text-white">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="ai-assistant.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="zap" class="w-4 h-4"></i>
+                        <span>AI Assistant</span>
+                    </a>
+                    <a href="media-library.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="image" class="w-4 h-4"></i>
+                        <span>Media Library</span>
+                    </a>
+                    <a href="team.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                        <span>Team</span>
+                    </a>
+                    <a href="settings.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                        <i data-lucide="settings" class="w-4 h-4"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1">
+            <!-- Header -->
+            <div class="bg-white border-b border-gray-200 px-8 py-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Analytics</h1>
+                        <p class="text-gray-600 mt-1">Track your content performance and engagement</p>
+                    </div>
+                    <select class="border border-gray-300 rounded-lg px-3 py-2">
+                        <option>Last 30 days</option>
+                        <option>Last 7 days</option>
+                        <option>Last 90 days</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+                <!-- Key Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Total Posts</p>
+                                <p class="text-2xl font-bold text-gray-900">24</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="file-text" class="w-6 h-6 text-blue-600"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-green-600 text-sm font-medium">+12%</span>
+                            <span class="text-gray-500 text-sm ml-2">vs last month</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Total Impressions</p>
+                                <p class="text-2xl font-bold text-gray-900">12.5K</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="eye" class="w-6 h-6 text-green-600"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-green-600 text-sm font-medium">+8%</span>
+                            <span class="text-gray-500 text-sm ml-2">vs last month</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Engagement Rate</p>
+                                <p class="text-2xl font-bold text-gray-900">4.2%</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="heart" class="w-6 h-6 text-purple-600"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-red-600 text-sm font-medium">-2%</span>
+                            <span class="text-gray-500 text-sm ml-2">vs last month</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">New Followers</p>
+                                <p class="text-2xl font-bold text-gray-900">156</p>
+                            </div>
+                            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="user-plus" class="w-6 h-6 text-yellow-600"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="text-green-600 text-sm font-medium">+24%</span>
+                            <span class="text-gray-500 text-sm ml-2">vs last month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Engagement Chart -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Engagement Over Time</h3>
+                        <canvas id="engagementChart" width="400" height="200"></canvas>
+                    </div>
+
+                    <!-- Content Type Performance -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Content Type Performance</h3>
+                        <canvas id="contentTypeChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+                <!-- Top Performing Posts -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6">Top Performing Posts</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div class="flex-1">
+                                <h4 class="font-medium text-gray-900 mb-1">5 Essential Skills Every Digital Marketer Needs</h4>
+                                <p class="text-sm text-gray-600">Published 3 days ago</p>
+                            </div>
+                            <div class="flex items-center space-x-6 text-sm">
+                                <div class="text-center">
+                                    <div class="font-semibold text-gray-900">2.1K</div>
+                                    <div class="text-gray-500">Views</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-semibold text-gray-900">89</div>
+                                    <div class="text-gray-500">Likes</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-semibold text-gray-900">12</div>
+                                    <div class="text-gray-500">Comments</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-semibold text-green-600">4.8%</div>
+                                    <div class="text-gray-500">Engagement</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div class="flex-1">
+                                <h4 class="font-medium text-gray-900 mb-1">The Future of Remote Work: Trends to Watch</h4>
+                                <p class="text-sm text-gray-600">Published 5 days ago</p>
+                            </div>
+                            <div class="flex items-center space-x-6 text-sm">
+                                <div class="text-center">
+                                    <div class="font-semibold text-gray-900">1.8K</div>
+                                    <div class="text-gray-500">Views</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-semibold text-gray-900">76</div>
+                                    <div class="text-gray-500">Likes</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-semibold text-gray-900">8</div>
+                                    <div class="text-gray-500">Comments</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-semibold text-green-600">4.7%</div>
+                                    <div class="text-gray-500">Engagement</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div class="flex-1">
+                                <h4 class="font-medium text-gray-900 mb-1">10 Productivity Hacks That Actually Work</h4>
+                                <p class="text-sm text-gray-600">Published 1 week ago</p>
+                            </div>
+                            <div class="flex items-center space-x-6 text-sm">
+                                <div class="text-center">
+                                    <div class="font-semibold text-gray-900">1.5K</div>
+                                    <div class="text-gray-500">Views</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-semibold text-gray-900">64</div>
+                                    <div class="text-gray-500">Likes</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-semibold text-gray-900">15</div>
+                                    <div class="text-gray-500">Comments</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-semibold text-green-600">5.3%</div>
+                                    <div class="text-gray-500">Engagement</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Engagement Chart
+        const engagementCtx = document.getElementById('engagementChart').getContext('2d');
+        new Chart(engagementCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Engagement Rate',
+                    data: [3.2, 4.1, 3.8, 4.2],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 6
+                    }
+                }
+            }
+        });
+
+        // Content Type Chart
+        const contentTypeCtx = document.getElementById('contentTypeChart').getContext('2d');
+        new Chart(contentTypeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Posts', 'Articles', 'Carousels', 'Videos'],
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#ef4444']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

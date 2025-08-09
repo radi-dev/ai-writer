@@ -1,0 +1,131 @@
+<!-- Content Generator Page -->
+{{define "page_content"}}
+          <div id="generator-page" class="page-content">
+            <div class="max-w-7xl mx-auto">
+              <div class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-900 mb-2">LinkedIn Content Generator</h1>
+                <p class="text-xl text-gray-600">Create engaging LinkedIn content with the power of AI</p>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Generator Form -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 h-fit">
+                  <div class="p-6 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold flex items-center gap-2">
+                      <i class="fas fa-magic-wand-sparkles text-blue-600"></i>
+                      Generate Content
+                    </h2>
+                  </div>
+                  <div class="p-6 space-y-6">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Topic or Idea</label>
+                      <textarea id="topic-input" placeholder="What do you want to write about? (e.g., 'The importance of personal branding for career growth')" class="w-full min-h-[100px] p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Content Type</label>
+                        <select id="content-type" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                          <option value="post">Standard Post</option>
+                          <option value="story">Story</option>
+                          <option value="tips">Tips & Advice</option>
+                          <option value="question">Question</option>
+                          <option value="poll">Poll</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tone</label>
+                        <select id="tone" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                          <option value="professional">Professional</option>
+                          <option value="casual">Casual</option>
+                          <option value="inspirational">Inspirational</option>
+                          <option value="educational">Educational</option>
+                          <option value="humorous">Humorous</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Target Audience</label>
+                      <select id="audience" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select target audience</option>
+                        <option value="entrepreneurs">Entrepreneurs</option>
+                        <option value="marketers">Marketing Professionals</option>
+                        <option value="developers">Developers</option>
+                        <option value="sales">Sales Teams</option>
+                        <option value="hr">HR Professionals</option>
+                        <option value="students">Students</option>
+                        <option value="executives">Executives</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Keywords (comma-separated)</label>
+                      <textarea id="keywords" placeholder="leadership, innovation, growth mindset" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none" rows="2"></textarea>
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Length: <span id="length-value">150</span> words</label>
+                      <input type="range" id="length-slider" min="50" max="500" value="150" step="25" class="w-full">
+                    </div>
+
+                    <button id="generate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors">
+                      <i class="fas fa-magic-wand-sparkles mr-2"></i>
+                      Generate Content
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Preview -->
+                <div class="space-y-6">
+                  <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+                      <h2 class="text-xl font-semibold">Preview</h2>
+                      <div class="flex gap-2">
+                        <button class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50">
+                          <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                        <button class="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50">
+                          <i class="fas fa-download mr-1"></i>Export
+                        </button>
+                      </div>
+                    </div>
+                    <div class="p-6">
+                      <div id="preview-content" class="text-center py-12 text-gray-500">
+                        <i class="fas fa-comment-dots text-4xl mb-4 opacity-50"></i>
+                        <p>Your generated content will appear here</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Stats -->
+                  <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                      <h2 class="text-lg font-semibold">Content Analysis</h2>
+                    </div>
+                    <div class="p-6">
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                          <div id="word-count" class="text-2xl font-bold text-blue-600">0</div>
+                          <div class="text-sm text-gray-600">Words</div>
+                        </div>
+                        <div class="text-center p-4 bg-green-50 rounded-lg">
+                          <div id="char-count" class="text-2xl font-bold text-green-600">0</div>
+                          <div class="text-sm text-gray-600">Characters</div>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                          <div class="text-2xl font-bold text-purple-600">8.2</div>
+                          <div class="text-sm text-gray-600">Readability</div>
+                        </div>
+                        <div class="text-center p-4 bg-orange-50 rounded-lg">
+                          <div class="text-2xl font-bold text-orange-600">85%</div>
+                          <div class="text-sm text-gray-600">Engagement</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+{{end}}

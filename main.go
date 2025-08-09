@@ -1,96 +1,122 @@
 package main
 
 import (
-	"context"
-	"database/sql"
+	// "context"
 	"fmt"
+	"html/template"
 	"log"
+	"net/http"
 
+	"github.com/gorilla/mux"
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/tmc/langchaingo/llms"
-	"github.com/tmc/langchaingo/llms/ollama"
 )
 
-type Record struct {
-	Prompt, Response string
-}
-
-func initDB() (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", "memory.db")
-	if err != nil {
-		return nil, err
-	}
-	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS conv(id INTEGER PRIMARY KEY, role TEXT, text TEXT)`)
-	return db, err
-}
-
-func save(db *sql.DB, role, text string) {
-	_, _ = db.Exec("INSERT INTO conv(role, text) VALUES (?, ?)", role, text)
-}
-
-func history(db *sql.DB) ([]Record, error) {
-	rows, err := db.Query("SELECT role, text FROM conv ORDER BY id")
-	if err != nil {
-		return nil, err
-	}
-	var recs []Record
-	for rows.Next() {
-		var r Record
-		if err := rows.Scan(&r.Prompt, &r.Response); err != nil {
-			return nil, err
-		}
-		recs = append(recs, r)
-	}
-	return recs, nil
-}
+var fileServ = http.FileServer(http.Dir("templates/static/"))
 
 func main() {
-	ctx := context.Background()
-	db, err := initDB()
+	// ctx := context.Background()
+
+	r := mux.NewRouter()
+
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fileServ)).Methods("GET")
+	r.HandleFunc("/", home).Methods("GET")
+	r.HandleFunc("/assistant", assistant).Methods("GET")
+	r.HandleFunc("/analytics", analytics).Methods("GET")
+	r.HandleFunc("/media", media).Methods("GET")
+	r.HandleFunc("/scheduler", scheduler).Methods("GET")
+	r.HandleFunc("/settings", settings).Methods("GET")
+	r.HandleFunc("/team", team).Methods("GET")
+	r.HandleFunc("/templates", templates).Methods("GET")
+
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", "3000"), r); err != nil {
+		fmt.Println("Error starting server:", err)
+	}
+}
+
+func home(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Home page")
+	t, err := template.ParseFiles("templates/index.html", "templates/pages/content_generator.html")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
+	t.Execute(w, nil)
+}
 
-	llm, err := ollama.New(ollama.WithModel("gemma2:2b"))
+func assistant(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("templates")
+	t, err := template.ParseFiles("templates/index.html", "templates/pages/ai_assistant.html")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
+	t.Execute(w, nil)
+}
 
-	prompt := `Write a blog outline titled "Why Go is great for LLM apps", with bullet headings`
-	save(db, "user", prompt)
-	completion, err := llms.GenerateFromSinglePrompt(
-		ctx,
-		llm, prompt,
-		llms.WithTemperature(0.8),
-		llms.WithStreamingFunc(func(ctx context.Context, chunk []byte) error {
-			fmt.Print(string(chunk))
-			return nil
-		}),
-	)
+func analytics(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("analytics")
+	t, err := template.ParseFiles("templates/index.html", "templates/pages/analytics.html")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
+	t.Execute(w, nil)
+}
 
-	save(db, "assistant", completion)
-
-	// Expand into full post:
-	prompt2 := fmt.Sprintf("Expand this outline into a detailed blog post:\n\n%s", completion)
-	save(db, "user", prompt2)
-	resp2, err := llms.GenerateFromSinglePrompt(ctx, llm, prompt2, llms.WithTemperature(0.8),
-		llms.WithStreamingFunc(func(ctx context.Context, chunk []byte) error {
-			fmt.Print(string(chunk))
-			return nil
-		}))
+func media(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("media")
+	t, err := template.ParseFiles("templates/index.html", "templates/pages/media_library.html")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
-	save(db, "assistant", resp2)
+	t.Execute(w, nil)
+}
 
-	fmt.Println("\nHistory:")
-	conv, _ := history(db)
-	for _, r := range conv {
-		fmt.Printf("[%s] %s\n", r.Prompt, r.Response)
+func scheduler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("scheduler")
+	t, err := template.ParseFiles("templates/index.html", "templates/pages/scheduler.html")
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
 	}
+	t.Execute(w, nil)
+}
 
-	_ = completion
+func settings(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("settings")
+	t, err := template.ParseFiles("templates/index.html", "templates/pages/settings.html")
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	t.Execute(w, nil)
+}
+
+func team(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("team")
+	t, err := template.ParseFiles("templates/index.html", "templates/pages/team.html")
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	t.Execute(w, nil)
+}
+
+func templates(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("templates")
+	t, err := template.ParseFiles("templates/index.html", "templates/pages/templates.html")
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	t.Execute(w, nil)
 }

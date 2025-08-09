@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContentCraft - LinkedIn Content Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0A66C2',
+                        secondary: '#00A0DC',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F8FAFC'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <i data-lucide="pen-tool" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">ContentCraft</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-medium">JD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <button
+                            class="w-full flex items-center space-x-3 p-3 text-left rounded-lg bg-primary text-white">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            <span>New Content</span>
+                        </button>
+                        <button
+                            class="w-full flex items-center space-x-3 p-3 text-left rounded-lg hover:bg-gray-50 text-gray-700">
+                            <i data-lucide="history" class="w-4 h-4"></i>
+                            <span>Content History</span>
+                        </button>
+                        <button
+                            class="w-full flex items-center space-x-3 p-3 text-left rounded-lg hover:bg-gray-50 text-gray-700">
+                            <i data-lucide="bookmark" class="w-4 h-4"></i>
+                            <span>Saved Templates</span>
+                        </button>
+                        <button
+                            class="w-full flex items-center space-x-3 p-3 text-left rounded-lg hover:bg-gray-50 text-gray-700">
+                            <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                            <span>Analytics</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Usage Stats -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Usage This Month</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Content Generated</span>
+                                <span class="font-medium">47/100</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full" style="width: 47%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">AI Credits</span>
+                                <span class="font-medium">1,250/2,000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 62.5%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm font-medium">
+                        Upgrade Plan
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+                <!-- Header -->
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">Generate LinkedIn Content</h1>
+                    <p class="text-gray-600">Create engaging LinkedIn posts, articles, and carousels with AI assistance
+                    </p>
+                </div>
+
+                <!-- Content Generation Form -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <!-- Content Type -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Content Type</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button class="p-4 border-2 border-primary bg-primary/5 rounded-lg text-center">
+                                    <i data-lucide="file-text" class="w-6 h-6 mx-auto mb-2 text-primary"></i>
+                                    <div class="text-sm font-medium text-primary">Post</div>
+                                </button>
+                                <button
+                                    class="p-4 border-2 border-gray-200 rounded-lg text-center hover:border-gray-300">
+                                    <i data-lucide="newspaper" class="w-6 h-6 mx-auto mb-2 text-gray-400"></i>
+                                    <div class="text-sm font-medium text-gray-600">Article</div>
+                                </button>
+                                <button
+                                    class="p-4 border-2 border-gray-200 rounded-lg text-center hover:border-gray-300">
+                                    <i data-lucide="images" class="w-6 h-6 mx-auto mb-2 text-gray-400"></i>
+                                    <div class="text-sm font-medium text-gray-600">Carousel</div>
+                                </button>
+                                <button
+                                    class="p-4 border-2 border-gray-200 rounded-lg text-center hover:border-gray-300">
+                                    <i data-lucide="video" class="w-6 h-6 mx-auto mb-2 text-gray-400"></i>
+                                    <div class="text-sm font-medium text-gray-600">Video Script</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tone & Style -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Tone & Style</label>
+                            <select
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option>Professional</option>
+                                <option>Casual & Friendly</option>
+                                <option>Inspirational</option>
+                                <option>Educational</option>
+                                <option>Thought Leadership</option>
+                                <option>Storytelling</option>
+                            </select>
+
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Industry</label>
+                                <select
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option>Technology</option>
+                                    <option>Marketing</option>
+                                    <option>Finance</option>
+                                    <option>Healthcare</option>
+                                    <option>Education</option>
+                                    <option>Consulting</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Topic Input -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Topic or Key Message</label>
+                        <textarea
+                            class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                            rows="4"
+                            placeholder="Describe what you want to write about. Be specific about your main points, target audience, or key takeaways..."></textarea>
+                    </div>
+
+                    <!-- Advanced Options -->
+                    <div class="border-t border-gray-200 pt-6">
+                        <button class="flex items-center space-x-2 text-gray-600 hover:text-gray-800 mb-4">
+                            <i data-lucide="settings" class="w-4 h-4"></i>
+                            <span class="text-sm font-medium">Advanced Options</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </button>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Length</label>
+                                <select class="w-full p-2 border border-gray-300 rounded-lg text-sm">
+                                    <option>Short (50-100 words)</option>
+                                    <option>Medium (100-200 words)</option>
+                                    <option>Long (200+ words)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Include</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox"
+                                            class="rounded border-gray-300 text-primary focus:ring-primary" checked>
+                                        <span class="ml-2 text-sm text-gray-600">Hashtags</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox"
+                                            class="rounded border-gray-300 text-primary focus:ring-primary">
+                                        <span class="ml-2 text-sm text-gray-600">Call to Action</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Creativity</label>
+                                <input type="range" class="w-full" min="1" max="10" value="7">
+                                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                    <span>Conservative</span>
+                                    <span>Creative</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <div class="flex justify-center mt-8">
+                        <button
+                            class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 font-medium flex items-center space-x-2">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                            <span>Generate Content</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Generated Content Display -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-semibold text-gray-900">Generated Content</h2>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                            </button>
+                            <button class="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </button>
+                            <button class="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                                <i data-lucide="download" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Content Preview -->
+                    <div class="border border-gray-200 rounded-lg p-6 mb-6">
+                        <div class="flex items-start space-x-3 mb-4">
+                            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                <span class="text-white text-sm font-medium">JD</span>
+                            </div>
+                            <div>
+                                <div class="font-medium text-gray-900">John Doe</div>
+                                <div class="text-sm text-gray-500">Marketing Director at TechCorp</div>
+                            </div>
+                        </div>
+
+                        <div class="prose max-w-none">
+                            <p class="text-gray-800 leading-relaxed mb-4">
+                                🚀 Just wrapped up an incredible quarter with my team! Here are 3 key lessons we learned
+                                about scaling marketing operations:
+                            </p>
+                            <p class="text-gray-800 leading-relaxed mb-4">
+                                1️⃣ <strong>Data-driven decisions beat gut feelings</strong> - We increased our
+                                conversion rate by 40% by letting analytics guide our strategy instead of assumptions.
+                            </p>
+                            <p class="text-gray-800 leading-relaxed mb-4">
+                                2️⃣ <strong>Automation is your friend</strong> - Implementing marketing automation freed
+                                up 15 hours per week for strategic work.
+                            </p>
+                            <p class="text-gray-800 leading-relaxed mb-4">
+                                3️⃣ <strong>Team collaboration drives results</strong> - Breaking down silos between
+                                sales and marketing led to 25% more qualified leads.
+                            </p>
+                            <p class="text-gray-800 leading-relaxed mb-4">
+                                What's been your biggest marketing win this quarter? I'd love to hear your stories! 👇
+                            </p>
+                            <p class="text-primary text-sm">
+                                #MarketingStrategy #DataDriven #TeamWork #GrowthHacking #MarketingAutomation
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Content Metrics -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-gray-50 rounded-lg p-4 text-center">
+                            <div class="text-2xl font-bold text-gray-900">156</div>
+                            <div class="text-sm text-gray-600">Words</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4 text-center">
+                            <div class="text-2xl font-bold text-green-600">8.5</div>
+                            <div class="text-sm text-gray-600">Engagement Score</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4 text-center">
+                            <div class="text-2xl font-bold text-blue-600">5</div>
+                            <div class="text-sm text-gray-600">Hashtags</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4 text-center">
+                            <div class="text-2xl font-bold text-purple-600">2min</div>
+                            <div class="text-sm text-gray-600">Read Time</div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-3">
+                        <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 font-medium">
+                            Save to Library
+                        </button>
+                        <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium">
+                            Schedule Post
+                        </button>
+                        <button
+                            class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium">
+                            Edit Content
+                        </button>
+                        <button
+                            class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium">
+                            Generate Variations
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Content Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6">Recent Content</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Content Card 1 -->
+                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">Post</span>
+                        <span class="text-xs text-gray-500">2 hours ago</span>
+                    </div>
+                    <p class="text-gray-800 text-sm mb-3 line-clamp-3">
+                        The future of remote work is here, and it's more flexible than ever. Here's what we've
+                        learned...
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>142 words</span>
+                            <span>•</span>
+                            <span>Professional tone</span>
+                        </div>
+                        <button class="text-primary hover:text-primary/80">
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content Card 2 -->
+                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">Article</span>
+                        <span class="text-xs text-gray-500">1 day ago</span>
+                    </div>
+                    <p class="text-gray-800 text-sm mb-3 line-clamp-3">
+                        5 Essential Skills Every Digital Marketer Needs in 2024. The landscape is changing rapidly...
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>1,250 words</span>
+                            <span>•</span>
+                            <span>Educational tone</span>
+                        </div>
+                        <button class="text-primary hover:text-primary/80">
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content Card 3 -->
+                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <span
+                            class="px-2 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded">Carousel</span>
+                        <span class="text-xs text-gray-500">3 days ago</span>
+                    </div>
+                    <p class="text-gray-800 text-sm mb-3 line-clamp-3">
+                        10 Productivity Hacks That Actually Work. Slide-by-slide breakdown of proven techniques...
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2 text-xs text-gray-500">
+                            <span>10 slides</span>
+                            <span>•</span>
+                            <span>Inspirational tone</span>
+                        </div>
+                        <button class="text-primary hover:text-primary/80">
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Add some basic interactivity
+        document.addEventListener('DOMContentLoaded', function () {
+            // Content type selection
+            const contentTypeButtons = document.querySelectorAll('[class*="border-2"]');
+            contentTypeButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Remove active state from all buttons
+                    contentTypeButtons.forEach(btn => {
+                        btn.classList.remove('border-primary', 'bg-primary/5');
+                        btn.classList.add('border-gray-200');
+                        const icon = btn.querySelector('i');
+                        const text = btn.querySelector('div');
+                        if (icon) icon.classList.remove('text-primary');
+                        if (text) text.classList.remove('text-primary');
+                        if (icon) icon.classList.add('text-gray-400');
+                        if (text) text.classList.add('text-gray-600');
+                    });
+
+                    // Add active state to clicked button
+                    this.classList.add('border-primary', 'bg-primary/5');
+                    this.classList.remove('border-gray-200');
+                    const icon = this.querySelector('i');
+                    const text = this.querySelector('div');
+                    if (icon) icon.classList.add('text-primary');
+                    if (text) text.classList.add('text-primary');
+                    if (icon) icon.classList.remove('text-gray-400');
+                    if (text) text.classList.remove('text-gray-600');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
