@@ -128,7 +128,11 @@ func templates(w http.ResponseWriter, r *http.Request) {
 func generateResponse(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("generateResponsePost")
 	ctx := r.Context()
-	fmt.Println("\n\nformVal", r.FormValue("length-slider"))
+	fmt.Println("formVal", r.FormValue("length-slider"))
+	fmt.Println("content-type", r.FormValue("content-type"))
+	fmt.Println("tone", r.FormValue("tone"))
+	fmt.Println("audience", r.FormValue("audience"))
+	fmt.Println("keywords", r.FormValue("keywords"))
 	topic := r.FormValue("topic-input")
 	lengthStr := r.FormValue("length-slider")
 	length, err := strconv.Atoi(lengthStr)
