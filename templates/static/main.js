@@ -5,33 +5,42 @@ function initializeNavigation() {
   const sidebarToggle = document.getElementById("sidebar-toggle");
   const sidebar = document.getElementById("sidebar");
 
-  // Handle navigation clicks
+    const handleActiveNav = (item) => {
+      const targetPage = item.dataset.page + "-page";
+      const currentPage = document.getElementById(targetPage);
 
-  navItems.forEach((item) => {
-    const targetPage = item.dataset.page + "-page";
-    const currentPage = document.getElementById(targetPage);
-    if (currentPage) {
-      // Add active class to clicked item
-      item.classList.remove(
-        "text-gray-600",
-        "hover:bg-gray-50",
-        "hover:text-gray-900"
-      );
-      item.classList.add(
-        "bg-blue-50",
-        "text-blue-700",
-        "border-r-2",
-        "border-blue-600"
-      );
+      if (currentPage) {
+        // Add active class to clicked item
+        item.classList.remove(
+          "text-gray-600",
+          "hover:bg-gray-50",
+          "hover:text-gray-900"
+        );
+        item.classList.add(
+          "bg-blue-50",
+          "text-blue-700",
+          "border-r-2",
+          "border-blue-600"
+        );
 
-      console.log("targetPage", targetPage);
+        console.log("targetPage", targetPage);
 
-      // Close sidebar on mobile
-      if (window.innerWidth < 1024) {
-        sidebar.classList.remove("open");
+        // Close sidebar on mobile
+        if (window.innerWidth < 1024) {
+          sidebar.classList.remove("open");
+        }
       }
-    }
-  });
+    };
+
+    navItems.forEach((item) => {
+      handleActiveNav(item);
+      item.addEventListener("click", (e) => {
+        console.log("Reached here");
+        e.preventDefault();
+
+        handleActiveNav(item);
+      });
+    });
 
   // Handle sidebar toggle
   if (sidebarToggle) {

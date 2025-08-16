@@ -51,7 +51,7 @@
             <div class="px-4 mb-6">
               <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Main Menu</h2>
             </div>
-            <nav class="space-y-1 px-3"  hx-boost="true" hx-target="body" >
+            <nav class="space-y-1 px-3"  hx-boost="true" hx-target="body" hx-indicator=".spinner">
               <a href="/" class="nav-item flex items-center px-3 py-2 rounded-lg transition-all duration-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900" data-page="generator">
                 <i class="fas fa-file-text w-5 h-5 flex-shrink-0"></i>
                 <span class="ml-3 font-medium">Content Generator</span>
@@ -89,14 +89,22 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 p-6">
+        <main class="flex-1 p-6" hx-history-elt>
 
 {{template "page_content" }}
 
         </main>
       </div>
-    </div>
+
+      <div class="spinner inset-0 fixed items-center justify-center z-[1000] hidden">
+        <!-- From Uiverse.io by mrhyddenn -->
+<div class="spinnerx">
+    <div class="spinnerin"></div>
+</div>
+      </div>
 
     <script src="static/main.js"></script>
+
+
   </body>
 </html>
