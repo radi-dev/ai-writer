@@ -1,5 +1,7 @@
 <!-- Content Generator Page -->
 {{define "page_content"}}
+<!-- Content Generator Form Page -->
+
           <div id="generator-page" class="page-content">
             <div class="max-w-7xl mx-auto">
               <div class="mb-8">
@@ -70,7 +72,8 @@
                       <input type="range" id="length-slider" name="length-slider" min="50" max="500" value="150" step="25" class="w-full">
                     </div>
 
-                    <button hx-post="/generate" hx-target="#generator-page" hx-swap="outerHTML" id="generate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors">
+                    <!-- <button hx-post="/generate" hx-target="#generator-page" hx-swap="outerHTML" id="generate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors"> -->
+                    <button hx-post="/generate"   hx-target="#preview-content" hx-swap="outerHTML" id="generate-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors">
                       <i class="fas fa-magic-wand-sparkles mr-2"></i>
                       Generate Content
                     </button>
@@ -92,9 +95,61 @@
                       </div>
                     </div>
                     <div class="p-6">
+                      <div id="preview-content-box" class="text-center py-12 text-gray-500">
+                        <!-- Preview Content -->
+        <div class="linkedin-post">
+          <div class="linkedin-post-header">
+            <div class="flex items-center space-x-3">
+              <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                <span class="text-gray-600 font-medium">CW</span>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Content Writer</h3>
+                <p class="text-sm text-gray-500">Marketing Professional • 2nd</p>
+                <p class="text-xs text-gray-400">2h • 🌍</p>
+              </div>
+              <div class="ml-auto">
+                <button class="p-2 hover:bg-gray-100 rounded">
+                  <i class="fas fa-ellipsis-h text-gray-400"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="linkedin-post-content h-60 overflow-y-auto">
+            <div class="p-6">
                       <div id="preview-content" class="text-center py-12 text-gray-500">
                         <i class="fas fa-comment-dots text-4xl mb-4 opacity-50"></i>
                         <p>Your generated content will appear here</p>
+                      </div>
+                    </div>
+                  </div>
+          </div>
+          <div class="linkedin-post-actions">
+            <div class="flex items-center text-sm text-gray-500 mb-3">
+              <span>👍 42 likes</span>
+              <span class="ml-auto">8 comments • 3 reposts</span>
+            </div>
+            <div class="flex items-center justify-between w-full">
+              <div class="linkedin-post-action">
+                <i class="fas fa-thumbs-up"></i>
+                <span>Like</span>
+              </div>
+              <div class="linkedin-post-action">
+                <i class="fas fa-comment"></i>
+                <span>Comment</span>
+              </div>
+              <div class="linkedin-post-action">
+                <i class="fas fa-share"></i>
+                <span>Share</span>
+              </div>
+              <div class="linkedin-post-action">
+                <i class="fas fa-paper-plane"></i>
+                <span>Send</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
                       </div>
                     </div>
                   </div>
@@ -129,4 +184,7 @@
               </div>
             </div>
           </div>
+
+
+
 {{end}}

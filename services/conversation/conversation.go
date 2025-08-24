@@ -4,14 +4,19 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net/http"
+	"strings"
+
+	"github.com/tmc/langchaingo/llms"
 
 	"github.com/radi-dev/ai-writer/ai"
 	"github.com/radi-dev/ai-writer/database"
 	"github.com/radi-dev/ai-writer/database/messages"
-	"github.com/tmc/langchaingo/llms"
+	"github.com/radi-dev/ai-writer/services/sse"
 )
 
-func WriteLinkedInArticle(ctx context.Context, topic string, length int) string {
+func WriteLinkedInArticle(ctx context.Context, w http.ResponseWriter, r *http.Request, topic string, length int) string {
+	// ctx := r.Context()
 	prompt := "Write a random LinkedIn article"
 	if topic != "" {
 		prompt = "Write a LinkedIn article based on the topic: " + topic
@@ -22,19 +27,50 @@ func WriteLinkedInArticle(ctx context.Context, topic string, length int) string 
 
 	messages.Create(database.DB, "user", prompt)
 
-	completion, err := llms.GenerateFromSinglePrompt(
-		ctx,
-		ai.LLM, prompt, llms.WithMaxLength(100),
-		llms.WithTemperature(0.8),
+	input := strings.TrimSpace(prompt)
+
+	fmt.Print(input)
+
+	response, err := ai.LLM.GenerateContent(ctx, []llms.MessageContent{
+		llms.TextParts(llms.ChatMessageTypeHuman, input),
+	}, llms.WithTemperature(0.4), llms.WithMaxLength(length),
 		llms.WithStreamingFunc(func(ctx context.Context, chunk []byte) error {
+
 			fmt.Print(string(chunk))
+			sse.SseHandler(ctx, w, r, string(chunk))
 			return nil
 		}),
 	)
+	fmt.Fprintf(w, "event: done\ndata: [END]\n\n")
+	w.(http.Flusher).Flush()
+
+	// GenerateFromSinglePrompt(
+	// 	ctx,
+	// 	ai.LLM, prompt, llms.WithMaxLength(100),
+	// 	llms.WithTemperature(0.8),
+	// 	llms.WithStreamingFunc(func(ctx context.Context, chunk []byte) error {
+	// 		// fmt.Print(string(chunk))
+	// 		sse.SseHandler(w, r, string(chunk))
+	// 		return nil
+	// 	}),
+	// )
+
+	// completion, err := llms.GenerateFromSinglePrompt(
+	// 	ctx,
+	// 	ai.LLM, prompt, llms.WithMaxLength(100),
+	// 	llms.WithTemperature(0.8),
+	// 	llms.WithStreamingFunc(func(ctx context.Context, chunk []byte) error {
+	// 		// fmt.Print(string(chunk))
+	// 		sse.SseHandler(w, r, string(chunk))
+	// 		return nil
+	// 	}),
+	// )
 
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	completion := response.Choices[0].Content
 
 	messages.Create(database.DB, "assistant", completion)
 	return completion

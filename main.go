@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"net/url"
 	"strconv"
 
 	"github.com/gorilla/mux"
@@ -30,7 +31,8 @@ func main() {
 	r.HandleFunc("/team", team).Methods("GET")
 	r.HandleFunc("/templates", templates).Methods("GET")
 
-	r.HandleFunc("/generate", generateResponse).Methods("POST")
+	r.HandleFunc("/generate", buildGenerationUrl).Methods("POST")
+	r.HandleFunc("/generate", generateResponse).Methods("Get")
 
 	if err := http.ListenAndServe(fmt.Sprintf(":%s", "3000"), r); err != nil {
 		fmt.Println("Error starting server:", err)
@@ -125,9 +127,9 @@ func templates(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, nil)
 }
 
-func generateResponse(w http.ResponseWriter, r *http.Request) {
+func buildGenerationUrl(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("generateResponsePost")
-	ctx := r.Context()
+
 	fmt.Println("formVal", r.FormValue("length-slider"))
 	fmt.Println("content-type", r.FormValue("content-type"))
 	fmt.Println("tone", r.FormValue("tone"))
@@ -135,25 +137,86 @@ func generateResponse(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("keywords", r.FormValue("keywords"))
 	topic := r.FormValue("topic-input")
 	lengthStr := r.FormValue("length-slider")
-	length, err := strconv.Atoi(lengthStr)
+	_, err := strconv.Atoi(lengthStr)
+	// length, err := strconv.Atoi(lengthStr)
 	if err != nil {
 		http.Error(w, "Invalid length value", http.StatusBadRequest)
 		return
 	}
+	// conversation.WriteLinkedInArticle(w, r, topic, length)
+	//
+	//
+	//
 
-	response := conversation.WriteLinkedInArticle(ctx, topic, length)
-	t, err := template.ParseFiles("templates/forms/content_generator_form.html")
-	if err != nil {
-		log.Println(err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-	type responseData struct {
-		Response string
-	}
-	data := responseData{
-		Response: response,
-	}
+	//Urlencode the data here
+	urlQuery := fmt.Sprintf("/generate?topic=%s&length=%s", url.QueryEscape(topic), lengthStr)
 
-	t.Execute(w, data)
+	htmlStr := fmt.Sprintf(`"<div id="preview-content" hx-sse="connect:%s"  class="text-center py-12 text-gray-500">
+	<div  hx-sse="swap:message" hx-swap="beforeend">
+
+                        <i class="fas fa-comment-dots text-4xl mb-4 opacity-50"></i>
+                        <p>Your generated content will appear here</p>
+						</div >
+                      </div>"`, urlQuery)
+
+	fmt.Fprint(w, template.HTML(htmlStr))
+	// t, err := template.ParseFiles("templates/forms/content_generator_form.html")
+	// if err != nil {
+	// 	log.Println(err)
+	// 	http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	// 	return
+	// }
+	// type responseData struct {
+	// 	Response string
+	// }
+
+	// response := conversation.WriteLinkedInArticle(w, r, topic, length)
+
+	// data := responseData{
+	// 	Response: response,
+	// }
+
+	// t.Execute(w, data)
+}
+func generateResponse(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	fmt.Println("generateResponsePost")
+	q := r.URL.Query()
+	lengthStr := q.Get("length")
+	topic := q.Get("topic")
+	length, _ := strconv.Atoi(lengthStr)
+
+	// fmt.Fprint(w, "Done")
+
+	// fmt.Println("formVal", r.FormValue("length-slider"))
+	// fmt.Println("content-type", r.FormValue("content-type"))
+	// fmt.Println("tone", r.FormValue("tone"))
+	// fmt.Println("audience", r.FormValue("audience"))
+	// fmt.Println("keywords", r.FormValue("keywords"))
+	// topic := r.FormValue("topic-input")
+	// lengthStr := r.FormValue("length-slider")
+	// length, err := strconv.Atoi(lengthStr)
+	// if err != nil {
+	// 	http.Error(w, "Invalid length value", http.StatusBadRequest)
+	// 	return
+	// }
+	conversation.WriteLinkedInArticle(ctx, w, r, topic, length)
+
+	// t, err := template.ParseFiles("templates/forms/content_generator_form.html")
+	// if err != nil {
+	// 	log.Println(err)
+	// 	http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	// 	return
+	// }
+	// type responseData struct {
+	// 	Response string
+	// }
+
+	// response := conversation.WriteLinkedInArticle(w, r, topic, length)
+
+	// data := responseData{
+	// 	Response: response,
+	// }
+
+	// t.Execute(w, data)
 }
